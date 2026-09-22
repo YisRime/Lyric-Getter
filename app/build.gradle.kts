@@ -15,15 +15,15 @@ if (rootProject.file("local.properties").canRead())
     localProperties.load(rootProject.file("local.properties").inputStream())
 
 android {
-    namespace = "cn.lyric.getter"
+    namespace = "de.yisrime.lrcget"
     compileSdk = 36
     val buildTime = System.currentTimeMillis()
     defaultConfig {
-        applicationId = "cn.lyric.getter"
+        applicationId = "de.yisrime.lrcget"
         minSdk = 29
         targetSdk = 36
-        versionCode = 28
-        versionName = "3.0.0"
+        versionCode = 100
+        versionName = "1.0.0"
         dependenciesInfo.includeInApk = false
         ndk.abiFilters += arrayOf("arm64-v8a", "armeabi-v7a", "x86", "x86_64")
         buildConfigField("long", "BUILD_TIME", "$buildTime")
@@ -105,7 +105,6 @@ dependencies {
     implementation(libs.navigation.ui.ktx)
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.swiperefreshlayout)
-    implementation(libs.cardSlider)
 
     implementation(libs.kotlinx.serialization.json)
 

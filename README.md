@@ -1,19 +1,19 @@
-![](https://socialify.git.ci/xiaowine/Lyric-Getter/image?description=1&descriptionEditable=通过Hook获取音乐软件的歌词，提供给其他模块\软件使用&language=1&name=1&owner=1&theme=Auto)
+![](https://socialify.git.ci/YisRime/Lyric-Getter/image?description=1&descriptionEditable=通过Hook获取音乐软件的歌词，提供给其他模块\软件使用&language=1&name=1&owner=1&theme=Auto)
 ---
-![Release Download](https://img.shields.io/github/downloads/Xposed-Modules-Repo/cn.lyric.getter/total?style=flat-square)  
-![Release Download](https://img.shields.io/github/downloads/xiaowine/Lyric-Getter/total?style=flat-square)  
-[![Release Version](https://img.shields.io/github/v/release/xiaowine/Lyric-Getter?style=flat-square)](https://github.com/xiaowine/Lyric-Getter/releases/latest)  
-[![GitHub license](https://img.shields.io/github/license/xiaowine/Lyric-Getter?style=flat-square)](https://github.com/xiaowine/Lyric-Getter/LICENSE)  
-[![GitHub Star](https://img.shields.io/github/stars/xiaowine/Lyric-Getter?style=flat-square)](https://github.com/xiaowine/Lyric-Getter/stargazers)  
-[![GitHub Fork](https://img.shields.io/github/forks/xiaowine/Lyric-Getter?style=flat-square)](https://github.com/xiaowine/Lyric-Getter/network/members)  
-![GitHub Repo size](https://img.shields.io/github/repo-size/xiaowine/Lyric-Getter?style=flat-square&color=3cb371)  
-[![GitHub Repo Languages](https://img.shields.io/github/languages/top/xiaowine/Lyric-Getter?style=flat-square)](https://github.com/xiaowine/Lyric-Getter/search?l=koltin)  
-[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2F577fkj%2FStatusBarLyric%2Fbadge%3Fref%3Dmain&style=flat)](https://actions-badge.atrox.dev/xiaowine/Lyric-Getter/goto?ref=main)  
-![GitHub Star](https://img.shields.io/github/stars/xiaowine/Lyric-Getter.svg?style=social)
+![Release Download](https://img.shields.io/github/downloads/Xposed-Modules-Repo/de.yisrime.lrcget/total?style=flat-square)  
+![Release Download](https://img.shields.io/github/downloads/YisRime/Lyric-Getter/total?style=flat-square)  
+[![Release Version](https://img.shields.io/github/v/release/YisRime/Lyric-Getter?style=flat-square)](https://github.com/YisRime/Lyric-Getter/releases/latest)  
+[![GitHub license](https://img.shields.io/github/license/YisRime/Lyric-Getter?style=flat-square)](https://github.com/YisRime/Lyric-Getter/LICENSE)  
+[![GitHub Star](https://img.shields.io/github/stars/YisRime/Lyric-Getter?style=flat-square)](https://github.com/YisRime/Lyric-Getter/stargazers)  
+[![GitHub Fork](https://img.shields.io/github/forks/YisRime/Lyric-Getter?style=flat-square)](https://github.com/YisRime/Lyric-Getter/network/members)  
+![GitHub Repo size](https://img.shields.io/github/repo-size/YisRime/Lyric-Getter?style=flat-square&color=3cb371)  
+[![GitHub Repo Languages](https://img.shields.io/github/languages/top/YisRime/Lyric-Getter?style=flat-square)](https://github.com/YisRime/Lyric-Getter/search?l=koltin)  
+[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2FYisRime%2FLyric-Getter%2Fbadge%3Fref%3Dmain&style=flat)](https://actions-badge.atrox.dev/YisRime/Lyric-Getter/goto?ref=main)  
+![GitHub Star](https://img.shields.io/github/stars/YisRime/Lyric-Getter.svg?style=social)
 
 ## 版本与作者
 
-- 版本：3.0.0（versionCode 28）
+- 版本：1.0.0（versionCode 100）
 - 原项目作者：[xiaowine](https://github.com/xiaowine/Lyric-Getter)
 - 本分支维护与 libxposed 适配：[Yis_Rime](https://github.com/YisRime)
 
@@ -27,7 +27,7 @@
 
 #### 因为模块通过监听媒体通知事件，来判断是否应该隐藏歌词。而部分音乐软件默认通知样式为自定义的，所以需要将通知样式改为系统样式
 ---
-### 支持软件请在模块内查看，或查看[规则文件](https://github.com/xiaowine/Lyric-Getter/blob/gh-pages/app_rules.json)
+### 支持软件请在模块内查看，或查看[规则文件](https://github.com/YisRime/Lyric-Getter/blob/gh-pages/app_rules.json)
 ---
 
 ### 你也可以主动使用本模块API，用于收发歌词[Lyric-Getter-Api](https://github.com/xiaowine/Lyric-Getter-Api)
@@ -36,7 +36,7 @@
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=xiaowine/Lyric-Getter&type=Timeline)](https://star-history.com/#xiaowine/Lyric-Getter&Timeline)
+[![Star History Chart](https://api.star-history.com/svg?repos=YisRime/Lyric-Getter&type=Timeline)](https://star-history.com/#YisRime/Lyric-Getter&Timeline)
 
 ## Thanks
 [<img src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.png" width="200"/>](https://www.jetbrains.com)

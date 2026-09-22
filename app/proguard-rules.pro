@@ -1,4 +1,4 @@
--keep class cn.lyric.getter.hook.MainHook
+-keep class de.yisrime.lrcget.hook.MainHook
 -keep class cn.lyric.getter.api.data.* { *; }
--keep class cn.lyric.getter.tool.MeiZuNotification { *; }
--keep class cn.lyric.getter.hook.app.Netease
+-keep class de.yisrime.lrcget.tool.MeiZuNotification { *; }
+-keep class de.yisrime.lrcget.hook.app.Netease
