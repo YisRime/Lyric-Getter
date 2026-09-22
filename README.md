@@ -11,9 +11,17 @@
 [![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2F577fkj%2FStatusBarLyric%2Fbadge%3Fref%3Dmain&style=flat)](https://actions-badge.atrox.dev/xiaowine/Lyric-Getter/goto?ref=main)  
 ![GitHub Star](https://img.shields.io/github/stars/xiaowine/Lyric-Getter.svg?style=social)
 
+## 版本与作者
+
+- 版本：3.0.0（versionCode 28）
+- 原项目作者：[xiaowine](https://github.com/xiaowine/Lyric-Getter)
+- 本分支维护与 libxposed 适配：[Yis_Rime](https://github.com/YisRime)
+
+本版将模块入口由 `assets/xposed_init` 迁移至 `META-INF/xposed/java_init.list`，Hook 层改用 libxposed API（`io.github.libxposed:api:101`、EzXHelper 3.x），配置读写改由 libxposed RemotePreferences 承载，不再依赖全局可读的 XML 偏好文件；模块仅在使用 LyricGetter 时把配置从旧的 `shared_prefs` 一次性导入，随后删除旧文件。因不再走 legacy Xposed API，本模块要求宿主框架实现 libxposed 规范，LSPosed 1.x 与 LSPatch 等仅支持旧 API 的框架无法加载。最低系统版本相应提高至 Android 10。
+
 ## 这是什么东西？
 
-#### 这是一个Xposed模块（现支持LSPosed\LSPatch），通过Hook获取音乐软件的歌词，提供给其他模块\软件使用
+#### 这是一个Xposed模块（需框架支持 libxposed 规范，LSPosed 2.x 及以上），通过Hook获取音乐软件的歌词，提供给其他模块\软件使用
 
 ## 为什么我的歌词不隐藏？
 
