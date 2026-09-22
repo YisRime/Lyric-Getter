@@ -17,11 +17,13 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.graphics.drawable.IconCompat
 import cn.lyric.getter.R
+import cn.lyric.getter.config.ConfigStore
 import cn.xiaowine.xkt.LogTool.log
 import java.io.DataOutputStream
 
 object Tools {
-    var xpActivation: Boolean = false
+    val xpActivation: Boolean
+        get() = ConfigStore.isAttached
 
     val getPhoneName by lazy {
         val marketName = getSystemProperties("ro.product.marketname")

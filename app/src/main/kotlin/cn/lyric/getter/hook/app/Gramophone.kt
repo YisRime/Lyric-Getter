@@ -4,10 +4,10 @@ import android.app.Notification
 import cn.lyric.getter.api.data.ExtraData
 import cn.lyric.getter.hook.BaseHook
 import cn.lyric.getter.tool.HookTools.eventTools
-import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
-import com.github.kyuubiran.ezxhelper.EzXHelper.classLoader
-import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
-import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
+import io.github.kyuubiran.ezxhelper.core.util.ClassUtil.loadClass
+import io.github.kyuubiran.ezxhelper.core.ClassLoaderProvider.classLoader
+import io.github.kyuubiran.ezxhelper.xposed.dsl.HookFactory.`-Static`.createHook
+import io.github.kyuubiran.ezxhelper.core.finder.MethodFinder.`-Static`.methodFinder
 
 object Gramophone : BaseHook() {
 

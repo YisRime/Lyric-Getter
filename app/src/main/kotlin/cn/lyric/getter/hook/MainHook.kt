@@ -1,6 +1,7 @@
 package cn.lyric.getter.hook
 
 import cn.lyric.getter.BuildConfig
+import cn.lyric.getter.config.ConfigStore
 import cn.lyric.getter.hook.app.APlayer
 import cn.lyric.getter.hook.app.Api
 import cn.lyric.getter.hook.app.Apple
@@ -32,16 +33,25 @@ import cn.lyric.getter.hook.app.SystemUi
 import cn.lyric.getter.hook.app.Toside
 import cn.xiaowine.xkt.LogTool
 import cn.xiaowine.xkt.LogTool.log
-import com.github.kyuubiran.ezxhelper.EzXHelper
-import de.robv.android.xposed.IXposedHookLoadPackage
-import de.robv.android.xposed.IXposedHookZygoteInit
-import de.robv.android.xposed.callbacks.XC_LoadPackage
+import io.github.kyuubiran.ezxhelper.core.EzXReflection
+import io.github.kyuubiran.ezxhelper.xposed.EzXposed
+import io.github.libxposed.api.XposedModule
+import io.github.libxposed.api.XposedModuleInterface.ModuleLoadedParam
+import io.github.libxposed.api.XposedModuleInterface.PackageLoadedParam
 
-class MainHook : IXposedHookLoadPackage, IXposedHookZygoteInit {
-    override fun handleLoadPackage(lpparam: XC_LoadPackage.LoadPackageParam) {
-        EzXHelper.initHandleLoadPackage(lpparam)
+class MainHook : XposedModule() {
+    override fun onModuleLoaded(param: ModuleLoadedParam) {
+        EzXposed.initOnModuleLoaded(this, param)
+        EzXposed.initModuleResources()
+    }
+
+    override fun onPackageLoaded(param: PackageLoadedParam) {
+        EzXposed.initOnPackageLoaded(param)
+        EzXReflection.init(param.defaultClassLoader)
+        attachPreferences()
         LogTool.init("Lyrics Getter", { BuildConfig.DEBUG }, BuildConfig.DEBUG)
-        when (lpparam.packageName) {
+        "${frameworkName} ${frameworkVersion}(${frameworkVersionCode}) api=$apiVersion".log()
+        when (param.packageName) {
             "com.android.systemui" -> initHooks(SystemUi)
             "com.tencent.qqmusic" -> initHooks(QQMusic)
             "com.miui.player" -> initHooks(MiPlayer)
@@ -76,8 +86,10 @@ class MainHook : IXposedHookLoadPackage, IXposedHookZygoteInit {
         }
     }
 
-    override fun initZygote(startupParam: IXposedHookZygoteInit.StartupParam) {
-        EzXHelper.initZygote(startupParam)
+    private fun attachPreferences() {
+        runCatching {
+            ConfigStore.attach(getRemotePreferences(ConfigStore.GROUP), false)
+        }.onFailure { "Remote preferences unavailable: ${it.message}".log() }
     }
 
     private fun initHooks(vararg hook: BaseHook) {
@@ -86,7 +98,7 @@ class MainHook : IXposedHookLoadPackage, IXposedHookZygoteInit {
                 if (it.isInit) return@forEach
                 it.init()
                 it.isInit = true
-                "Inited hook: ${it.javaClass.name}, Package Name: ${EzXHelper.hostPackageName}".log()
+                "Inited hook: ${it.javaClass.name}, Package Name: ${EzXposed.hookedPackageName}".log()
             } catch (e: Exception) {
                 e.printStackTrace()
                 "Init hook ${it.javaClass.name} failed".log()

@@ -24,7 +24,7 @@ import cn.lyric.getter.tool.Tools.restartTheScopedSoftware
 import cn.lyric.getter.ui.adapter.NoticeAdapter
 import cn.lyric.getter.ui.viewmodel.HomeViewModel
 import cn.lyric.getter.ui.viewmodel.ShareViewModel
-import cn.xiaowine.dsp.DSP
+import cn.lyric.getter.config.ConfigStore
 import cn.xiaowine.xkt.AcTool.restartApp
 import cn.xiaowine.xkt.Tool.isNotNull
 import cn.xiaowine.xkt.Tool.toUpperFirstCaseAndLowerOthers
@@ -37,7 +37,7 @@ import java.util.Locale
 class HomeFragment : Fragment() {
     private var recoveryPickerLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) {
         it.isNotNull { uri ->
-            BackupTools.handleReadDocument(requireActivity(), DSP.sharedPreferences, uri)
+            ConfigStore.source.isNotNull { sp -> BackupTools.handleReadDocument(requireActivity(), sp, uri) }
             MaterialAlertDialogBuilder(requireContext()).apply {
                 setTitle(R.string.recovery)
                 setCancelable(false)
@@ -51,7 +51,7 @@ class HomeFragment : Fragment() {
     }
     private var backupPickerLauncher = registerForActivityResult(ActivityResultContracts.CreateDocument("application/json")) {
         it.isNotNull { uri ->
-            BackupTools.handleCreateDocument(requireActivity(), DSP.sharedPreferences, uri)
+            ConfigStore.source.isNotNull { sp -> BackupTools.handleCreateDocument(requireActivity(), sp, uri) }
         }
     }
 

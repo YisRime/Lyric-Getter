@@ -9,10 +9,10 @@ import cn.lyric.getter.tool.HookTools.isApi
 import cn.xiaowine.xkt.LogTool.log
 import cn.xiaowine.xkt.Tool.isNot
 import cn.xiaowine.xkt.Tool.isNotNull
-import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
-import com.github.kyuubiran.ezxhelper.ObjectHelper.Companion.objectHelper
-import com.github.kyuubiran.ezxhelper.finders.ConstructorFinder.`-Static`.constructorFinder
-import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
+import io.github.kyuubiran.ezxhelper.xposed.dsl.HookFactory.`-Static`.createHook
+import io.github.kyuubiran.ezxhelper.core.helper.ObjectHelper.`-Static`.objectHelper
+import io.github.kyuubiran.ezxhelper.core.finder.ConstructorFinder.`-Static`.constructorFinder
+import io.github.kyuubiran.ezxhelper.core.finder.MethodFinder.`-Static`.methodFinder
 
 object Api : BaseHook() {
     override fun init() {
@@ -24,7 +24,8 @@ object Api : BaseHook() {
         isApi(classLoader) { clazz ->
             clazz.constructorFinder().first().createHook {
                 before { hookParam ->
-                    hookParam.thisObject.objectHelper().getObjectOrNullAs<Int>("API_VERSION").isNotNull { version ->
+                    val version = hookParam.thisObject.objectHelper().getObjectOrNull("API_VERSION") as Int?
+                    version.isNotNull {
                         if (version == BuildConfig.API_VERSION || version == 7 /* 不知名 API 版本 */) {
                             hookParam.thisObject.objectHelper().setObject("hasEnable", true)
                             clazz.methodFinder().first { name == "onMediaData" }.isNotNull {
@@ -45,7 +46,7 @@ object Api : BaseHook() {
                             clazz.methodFinder().first { name == "sendLyric" }.createHook {
                                 after { hookParam ->
                                     val extraData = ExtraData()
-                                    val extra = (hookParam.args[1]).objectHelper().getObjectOrNullAs<HashMap<String, Any>>("extra")!!
+                                    val extra = hookParam.args[1]!!.objectHelper().getObjectOrNull("extra") as HashMap<String, Any>
                                     extraData.mergeExtra(extra)
                                     eventTools.sendLyric(
                                         hookParam.args[0] as String,
@@ -58,10 +59,10 @@ object Api : BaseHook() {
                                     eventTools.cleanLyric()
                                 }
                             }
-                            return@before
+                        } else {
+                            "The APIs do not match".log()
                         }
                     }
-                    "The APIs do not match".log()
                 }
             }
 

@@ -8,11 +8,11 @@ import cn.lyric.getter.tool.HookTools.eventTools
 import cn.lyric.getter.tool.HookTools.fuckTinker
 import cn.lyric.getter.tool.HookTools.getProcessName
 import cn.lyric.getter.tool.Tools.getVersionCode
-import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
-import com.github.kyuubiran.ezxhelper.EzXHelper.classLoader
-import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
-import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
-import de.robv.android.xposed.XposedHelpers
+import io.github.kyuubiran.ezxhelper.core.util.ClassUtil.loadClass
+import io.github.kyuubiran.ezxhelper.core.ClassLoaderProvider.classLoader
+import io.github.kyuubiran.ezxhelper.xposed.dsl.HookFactory.`-Static`.createHook
+import io.github.kyuubiran.ezxhelper.core.finder.MethodFinder.`-Static`.methodFinder
+import io.github.kyuubiran.ezxhelper.core.util.ObjectUtil.getObject
 
 object Kugou : BaseHook() {
     override fun init() {
@@ -82,7 +82,7 @@ object Kugou : BaseHook() {
             .first { name == "createServiceObject" }
             .createHook {
                 after {
-                    val mServiceName = XposedHelpers.getObjectField(it.thisObject, "serviceName")
+                    val mServiceName = getObject(it.thisObject, "serviceName")
                     if (mServiceName == Context.WIFI_SERVICE && it.throwable != null) { // 当有错误抛出时才使用替代方法，防止软件崩溃。
                         it.throwable = null
                         it.result = null

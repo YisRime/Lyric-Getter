@@ -4,9 +4,9 @@ import android.view.View
 import android.widget.TextView
 import cn.lyric.getter.hook.BaseHook
 import cn.lyric.getter.tool.HookTools
-import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
-import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
-import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
+import io.github.kyuubiran.ezxhelper.core.util.ClassUtil.loadClass
+import io.github.kyuubiran.ezxhelper.xposed.dsl.HookFactory.`-Static`.createHook
+import io.github.kyuubiran.ezxhelper.core.finder.MethodFinder.`-Static`.methodFinder
 
 object Luna : BaseHook() {
     private var rightLyric: String = ""

@@ -20,7 +20,7 @@ android {
     val buildTime = System.currentTimeMillis()
     defaultConfig {
         applicationId = "cn.lyric.getter"
-        minSdk = 26
+        minSdk = 29
         targetSdk = 36
         versionCode = 27
         versionName = "2.0.27"
@@ -60,6 +60,7 @@ android {
     packaging {
         resources {
             excludes += "**"
+            merges += "META-INF/xposed/*"
         }
         dex {
             useLegacyPackaging = true
@@ -79,17 +80,23 @@ android {
 }
 
 
+configurations.all {
+    exclude(group = "org.jetbrains.kotlin", module = "kotlin-android-extensions-runtime")
+}
+
 dependencies {
-    compileOnly(libs.xposed)
+    compileOnly(libs.libxposed.api)
     compileOnly(libs.dev.rikka.hidden.stub)
 
-    implementation(libs.ezXHelper)
+    implementation(libs.ezxhelper.core)
+    implementation(libs.ezxhelper.xposed)
+    implementation(libs.ezxhelper.android.utils)
     implementation(libs.dexkit)
     implementation(libs.dev.rikka.hidden.compat)
 
     implementation(libs.lyricGetter.api)
     implementation(libs.xkt)
-    implementation(libs.dsp)
+    implementation(libs.libxposed.service)
 
     implementation(libs.core.ktx)
     implementation(libs.material)

@@ -1,7 +1,7 @@
 package cn.lyric.getter.tool
 
 import android.app.ActivityManager
-import android.app.AndroidAppHelper
+import io.github.kyuubiran.ezxhelper.xposed.EzXposed
 import android.app.Application
 import android.app.Notification
 import android.content.Context
@@ -12,12 +12,12 @@ import cn.xiaowine.xkt.LogTool.log
 import cn.xiaowine.xkt.Tool.isNot
 import cn.xiaowine.xkt.Tool.isNotNull
 import cn.xiaowine.xkt.Tool.isNull
-import com.github.kyuubiran.ezxhelper.ClassLoaderProvider
-import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
-import com.github.kyuubiran.ezxhelper.ClassUtils.loadClassOrNull
-import com.github.kyuubiran.ezxhelper.ClassUtils.setStaticObject
-import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
-import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
+import io.github.kyuubiran.ezxhelper.core.ClassLoaderProvider
+import io.github.kyuubiran.ezxhelper.core.util.ClassUtil.loadClass
+import io.github.kyuubiran.ezxhelper.core.util.ClassUtil.loadClassOrNull
+import io.github.kyuubiran.ezxhelper.core.util.ClassUtil.setStaticObject
+import io.github.kyuubiran.ezxhelper.xposed.dsl.HookFactory.`-Static`.createHook
+import io.github.kyuubiran.ezxhelper.core.finder.MethodFinder.`-Static`.methodFinder
 import org.luckypray.dexkit.DexKitBridge
 import org.luckypray.dexkit.query.enums.StringMatchType
 import java.lang.reflect.Method
@@ -25,7 +25,7 @@ import java.lang.reflect.Method
 object HookTools {
     val eventTools by lazy { EventTools(context) }
 
-    val context: Application by lazy { AndroidAppHelper.currentApplication() }
+    val context: Application by lazy { EzXposed.appContext as Application }
 
     fun dexKitBridge(classLoader: ClassLoader? = null, block: (DexKitBridge) -> Unit) {
         System.loadLibrary("dexkit")

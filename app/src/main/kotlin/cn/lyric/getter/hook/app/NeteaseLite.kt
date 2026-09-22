@@ -4,9 +4,9 @@ import android.widget.LinearLayout
 import cn.lyric.getter.hook.BaseHook
 import cn.lyric.getter.tool.HookTools
 import cn.xiaowine.xkt.Tool
-import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
-import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
-import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
+import io.github.kyuubiran.ezxhelper.core.util.ClassUtil.loadClass
+import io.github.kyuubiran.ezxhelper.xposed.dsl.HookFactory.`-Static`.createHook
+import io.github.kyuubiran.ezxhelper.core.finder.MethodFinder.`-Static`.methodFinder
 
 object NeteaseLite : BaseHook() {
     private var nowLyric: String = ""
@@ -27,7 +27,7 @@ object NeteaseLite : BaseHook() {
         }
         loadClass("android.view.WindowManagerImpl").methodFinder().first { name == "addView" }.createHook {
             after { view ->
-                if (view.args[0]::class.java.name.contains("floatlyric")) {
+                if (view.args[0]!!::class.java.name.contains("floatlyric")) {
                     (view.args[0] as LinearLayout).removeAllViews()
                 }
             }
