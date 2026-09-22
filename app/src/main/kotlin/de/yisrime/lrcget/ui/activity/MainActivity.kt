@@ -12,6 +12,7 @@ import de.yisrime.lrcget.tool.ActivityTools
 import de.yisrime.lrcget.tool.ActivityTools.checkUpdate
 import de.yisrime.lrcget.tool.ActivityTools.updateAppRules
 import de.yisrime.lrcget.tool.Tools.xpActivation
+import de.yisrime.lrcget.ui.App
 import de.yisrime.lrcget.ui.viewmodel.ShareViewModel
 import com.google.android.material.navigation.NavigationBarView
 
@@ -19,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     private val shareViewModel: ShareViewModel by viewModels()
 
     private lateinit var binding: ActivityMainBinding
+    private var activatedChange: ((Boolean) -> Unit)? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +33,16 @@ class MainActivity : AppCompatActivity() {
                 nav.visibility = View.GONE
             }
         }
+        activatedChange = { activated ->
+            runOnUiThread {
+                if (isDestroyed) return@runOnUiThread
+                if (shareViewModel.activated != activated) {
+                    shareViewModel.activated = activated
+                    recreate()
+                }
+            }
+        }
+        (application as App).activatedChange = activatedChange
     }
 
     override fun onStart() {
@@ -38,6 +50,12 @@ class MainActivity : AppCompatActivity() {
         (binding.nav as NavigationBarView).setupWithNavController(findNavController(R.id.nav_host_fragment))
         checkUpdate()
         updateAppRules()
+    }
+
+    override fun onDestroy() {
+        val app = application as App
+        if (app.activatedChange === activatedChange) app.activatedChange = null
+        super.onDestroy()
     }
 
     override fun onSupportNavigateUp(): Boolean {

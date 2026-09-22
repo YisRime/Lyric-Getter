@@ -14,6 +14,8 @@ import io.github.libxposed.service.XposedService
 import io.github.libxposed.service.XposedServiceHelper
 
 class App : Application() {
+    var activatedChange: ((Boolean) -> Unit)? = null
+
     override fun onCreate() {
         super.onCreate()
         DynamicColors.applyToActivitiesIfAvailable(this)
@@ -27,10 +29,12 @@ class App : Application() {
                     importLegacyPreferences()
                     config.updateTime = System.currentTimeMillis()
                 }.onFailure { "Service bind failed: ${it.message}".log() }
+                activatedChange?.invoke(ConfigStore.isAttached)
             }
 
             override fun onServiceDied(service: XposedService) {
                 ConfigStore.detach()
+                activatedChange?.invoke(false)
             }
         })
     }
