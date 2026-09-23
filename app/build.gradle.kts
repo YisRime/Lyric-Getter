@@ -22,8 +22,8 @@ android {
         applicationId = "de.yisrime.lrcget"
         minSdk = 29
         targetSdk = 36
-        versionCode = 101
-        versionName = "1.0.1"
+        versionCode = 103
+        versionName = "1.0.3"
         dependenciesInfo.includeInApk = false
         ndk.abiFilters += arrayOf("arm64-v8a", "armeabi-v7a", "x86", "x86_64")
         buildConfigField("long", "BUILD_TIME", "$buildTime")
