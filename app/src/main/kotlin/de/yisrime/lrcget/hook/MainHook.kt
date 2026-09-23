@@ -49,7 +49,7 @@ class MainHook : XposedModule() {
         EzXposed.initOnPackageLoaded(param)
         EzXReflection.init(param.defaultClassLoader)
         attachPreferences()
-        LogTool.init("Lyrics Getter", { BuildConfig.DEBUG }, BuildConfig.DEBUG)
+        LogTool.init("Lyrics Getter", { true }, false)
         "${frameworkName} ${frameworkVersion}(${frameworkVersionCode}) api=$apiVersion".log()
         when (param.packageName) {
             "com.android.systemui" -> initHooks(SystemUi)

@@ -73,4 +73,10 @@
   <string name="multiple_modes_work">通常使用できるモードが複数あります</string>
   <string name="show_title">タイトル表示を強制</string>
   <string name="version_differences">リリース版はログを出力しませんが、デバッグ版はログを出力します。開発者以外はデバッグ版をインストールしないことを推奨します。</string>
+    <string name="log_page">ログ</string>
+    <string name="log_refresh">再読み込み</string>
+    <string name="log_clear">ログを消去</string>
+    <string name="log_loading">ログを読み込み中…</string>
+    <string name="log_no_root">ログの読み取りに Root 権限が必要です</string>
+    <string name="log_empty">ログはありません</string>
 </resources>

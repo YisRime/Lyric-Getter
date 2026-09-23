@@ -22,6 +22,8 @@ import cn.xiaowine.xkt.LogTool.log
 import java.io.DataOutputStream
 
 object Tools {
+    private const val LOG_TAG = "Lyrics Getter"
+
     val xpActivation: Boolean
         get() = ConfigStore.isAttached
 
@@ -49,6 +51,23 @@ object Tools {
         }
         s += "echo 0"
         shell(s, true)
+    }
+
+    fun captureLogs(): String? = try {
+        val process = Runtime.getRuntime().exec(arrayOf("su", "-c", "logcat -d -v time"))
+        val output = process.inputStream.bufferedReader().lineSequence()
+            .filter { it.contains(LOG_TAG) }
+            .joinToString("\n")
+        process.waitFor()
+        if (process.exitValue() == 0) output else null
+    } catch (_: Exception) {
+        null
+    }
+
+    fun clearLogs(): Boolean = try {
+        Runtime.getRuntime().exec(arrayOf("su", "-c", "logcat -c")).waitFor() == 0
+    } catch (_: Exception) {
+        false
     }
 
     private fun shell(command: String, isSu: Boolean) {

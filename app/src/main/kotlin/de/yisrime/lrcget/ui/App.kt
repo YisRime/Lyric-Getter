@@ -21,7 +21,7 @@ class App : Application() {
         DynamicColors.applyToActivitiesIfAvailable(this)
         AcTool.init(this)
         ActivityTools.application = this
-        LogTool.init("Lyrics Getter", { BuildConfig.DEBUG })
+        LogTool.init("Lyrics Getter", { true }, false)
         XposedServiceHelper.registerListener(object : XposedServiceHelper.OnServiceListener {
             override fun onServiceBind(service: XposedService) {
                 runCatching {

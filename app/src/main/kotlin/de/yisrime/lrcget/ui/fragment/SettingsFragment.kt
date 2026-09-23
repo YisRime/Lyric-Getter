@@ -15,6 +15,7 @@ import de.yisrime.lrcget.databinding.FragmentSettingsBinding
 import de.yisrime.lrcget.tool.ConfigTools.config
 import de.yisrime.lrcget.tool.Tools.dp2px
 import de.yisrime.lrcget.ui.activity.DialogTransparentActivity
+import de.yisrime.lrcget.ui.activity.LogActivity
 import de.yisrime.lrcget.ui.activity.TestActivity
 import de.yisrime.lrcget.ui.view.Preferences
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -80,6 +81,15 @@ class SettingsFragment : Fragment() {
                     titleResId = R.string.lyric_test,
                     onClick = {
                         val intent = Intent(context, TestActivity::class.java)
+                        startActivity(intent)
+                    }
+                ))
+            addView(
+                createClickableView(
+                    context = context,
+                    titleResId = R.string.log_page,
+                    onClick = {
+                        val intent = Intent(context, LogActivity::class.java)
                         startActivity(intent)
                     }
                 ))
