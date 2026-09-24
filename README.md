@@ -13,7 +13,7 @@
 
 ## 版本与作者
 
-- 版本：1.0.0（versionCode 100）
+- 版本：1.0.7（versionCode 107）
 - 原项目作者：[xiaowine](https://github.com/xiaowine/Lyric-Getter)
 - 本分支维护与 libxposed 适配：[Yis_Rime](https://github.com/YisRime)
 
